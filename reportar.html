@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA - Registrar Nuevo Incidente</title>
+</head>
+<body>
+ 
+    <header>
+        <h1>SGA: Sistema de Gestión de Incidentes</h1>
+        <p>Instanciación Dinámica de Reportes Críticos</p>
+    </header>
+ <nav>
+        <ul>
+            <li><a href="index.html">Inicio (Dashboard)</a></li>
+            <li><a href="reportar.html">Reportar Incidente</a></li>
+            <li><a href="tickets.html">Listado de Tickets</a></li>
+        </ul>
+    </nav>
+
+      <main>
+        <section>
+            <h2>Formulario de Ingreso de Incidentes</h2>
+            <p>Por favor, ingrese los detalles técnicos del fallo detectado. Los campos marcados son obligatorios.</p>
+
+            <form action="#" method="POST">
+                <div>
+                    <label for="titulo">Título Corto de la Alerta (Resumen):</label><br>
+                    <input type="text" id="titulo" name="titulo" required placeholder="Ej: Caída de enlace de fibra">
+                </div>
+                <br>
+
+                <div>
+                    <label for="categoria">Tipo de Incidente (Clase de Destino):</label><br>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">-- Seleccione una opción --</option>
+                        <option value="IncidenteRed">Red (IncidenteRed)</option>
+                        <option value="IncidenteHardware">Hardware (IncidenteHardware)</option>
+                        <option value="IncidenteSoftware">Software (IncidenteSoftware)</option>
+                    </select>
+                </div>
+                <br>
+
+                <fieldset>
+                    <legend>Nivel de Prioridad / Criticidad:</legend>
+                    <input type="radio" id="prioridad-alta" name="prioridad" value="Alta" required>
+                    <label for="prioridad-alta">Alta (Afecta el funcionamiento del Data Center / Genera Escalamiento)</label><br>
+                    <input type="radio" id="prioridad-media" name="prioridad" value="Media">
+                    <label for="prioridad-media">Media (Inconveniente parcial en servidores secundarios)</label><br>
+                    <input type="radio" id="prioridad-baja" name="prioridad" value="Baja">
+                    <label for="prioridad-baja">Baja (Mantenimiento preventivo o bugs de software menores)</label>
+                </fieldset>
+                <br>
+
+                <div>
+                    <label for="descripcion">Descripción Detallada del Fallo (Atributo: descripcion):</label><br>
+                    <textarea id="descripcion" name="descripcion" rows="5" cols="55" required placeholder="Describa el comportamiento de la falla, códigos de error en consola y equipos afectados..."></textarea>
+                </div>
+                <br>
+
+                <div>
+                    <button type="submit">Ejecutar Registro de Ticket (crearIncidente)</button>
+                    <button type="reset">Limpiar Formulario</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desarrollado por: <strong>Pablo Joseph Pinargote Pico</strong> | 5to Semestre - Paralelo "A" | UTMonline</p>
+        <p>&copy; 2026 Universidad Técnica de Manabí - Todos los derechos reservados</p>
+    </footer>
+    
+</body>
+</html>
