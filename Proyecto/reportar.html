@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA - Registrar Nuevo Incidente</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container"> 
+        <header>
+            <h1>SGA: Sistema de Gestión de Incidentes</h1>
+            <p>Instanciación Dinámica de Reportes Críticos</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio (Dashboard)</a></li>
+                <li><a href="reportar.html">Reportar Incidente</a></li>
+                <li><a href="tickets.html">Listado de Tickets</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="card">
+                <h2>Formulario de Ingreso de Incidentes</h2>
+                <p>Por favor, ingrese los detalles técnicos del fallo detectado.</p>
+
+                <form action="#" method="POST">
+                    <div>
+                        <label for="titulo">Título Corto de la Alerta:</label><br>
+                        <input type="text" id="titulo" name="titulo" required placeholder="Ej: Caída de enlace de fibra">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="categoria">Tipo de Incidente:</label><br>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">-- Seleccione una opción --</option>
+                            <option value="IncidenteRed">Red</option>
+                            <option value="IncidenteHardware">Hardware</option>
+                            <option value="IncidenteSoftware">Software</option>
+                        </select>
+                    </div>
+                    <br>
+                    <fieldset>
+                        <legend>Nivel de Prioridad:</legend>
+                        <input type="radio" id="prioridad-alta" name="prioridad" value="Alta" required>
+                        <label for="prioridad-alta">Alta</label><br>
+                        <input type="radio" id="prioridad-media" name="prioridad" value="Media">
+                        <label for="prioridad-media">Media</label><br>
+                        <input type="radio" id="prioridad-baja" name="prioridad" value="Baja">
+                        <label for="prioridad-baja">Baja</label>
+                    </fieldset>
+                    <br>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Ejecutar Registro de Ticket</button>
+                        <button type="reset" class="btn" style="background-color: var(--secondary);">Limpiar Formulario</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>Desarrollado por: <strong>Pablo Joseph Pinargote Pico</strong> | 5to Semestre - Paralelo "A"</p>
+        </footer>
+
+    </div> 
+</body>
+</html>

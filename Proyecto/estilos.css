@@ -1,0 +1,122 @@
+/* ---  Variables de Diseño (UI Kit) --- */
+:root {
+    --primary: #0056b3;     
+    --secondary: #6c757d;   
+    --danger: #dc3545;      
+    --card-bg: #fffcf5;     
+    --bg-body: #f4f4f9;     
+    --text: #333;           
+}
+
+/* --- 2. Base del Sitio --- */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-body);
+    color: var(--text);
+}
+
+.container { 
+    width: 95%; 
+    margin: 40px auto; 
+    max-width: 1000px;
+}
+
+/* --- 3. Componentes de Tarjeta (Cards) --- */
+.card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid var(--primary); /* Toque de diseño en el borde */
+}
+
+/* --- 4. Navegacion --- */
+nav {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--danger);
+}
+
+/* --- 5. Botones y Formularios --- */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-primary { background-color: var(--primary); }
+.btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+input, select {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* --- 6. Tabla --- */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #eee;
+}
+
+/* --- 7. Responsividad --- */
+@media (max-width: 768px) {
+    .container { width: 90%; margin: 20px auto; }
+
+   
+
+}
+.logo-index {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 200px !important;    /* Tamaño controlado: 200px de ancho */
+    height: auto !important;
+    max-width: 100% !important; 
+}
+

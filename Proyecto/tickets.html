@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGA - Registro General de Tickets</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1>SGA: Sistema de Gestión de Incidentes</h1>
+            <p>Consolidado de Datos de la Colección en Memoria (listaTickets)</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio (Dashboard)</a></li>
+                <li><a href="reportar.html">Reportar Incidente</a></li>
+                <li><a href="tickets.html">Listado de Tickets</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="card">
+                <h2>Listado de Tickets Registrados</h2>
+                <p>Mapeo actual de objetos creados por la fábrica. Al cambiar el estado de un ticket, se dispara la notificación a los Técnicos Inscritos (Patrón Observer).</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id (String)</th>
+                                <th>Tipo de Objeto</th>
+                                <th>descripción (String)</th>
+                                <th>Prioridad</th>
+                                <th>estado (String)</th>
+                                <th>Acciones de Control (Casos de Uso)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>INC-001</td>
+                                <td>IncidenteRed</td>
+                                <td>Pérdida de paquetes en el Switch Backbone del Data Center.</td>
+                                <td>Alta</td>
+                                <td>Pendiente</td>
+                                <td><a href="#">Asignar Técnico</a> | <a href="#">Escalar Ticket</a></td>
+                            </tr>
+                            <tr>
+                                <td>INC-002</td>
+                                <td>IncidenteHardware</td>
+                                <td>Alerta de sobrecalentamiento en el Rack de Servidores de Base de Datos N°3.</td>
+                                <td>Alta</td>
+                                <td>En Proceso</td>
+                                <td><a href="#">Actualizar Estado</a> | <a href="#">Escalar Ticket</a></td>
+                            </tr>
+                            <tr>
+                                <td>INC-003</td>
+                                <td>IncidenteSoftware</td>
+                                <td>Excepción de desbordamiento en los scripts de respaldo automatizado de la nube.</td>
+                                <td>Media</td>
+                                <td>Resuelto</td>
+                                <td><strong>Caso Cerrado (Incidente Resolver)</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Desarrollado por: <strong>Pablo Joseph Pinargote Pico</strong> | 5to Semestre - Paralelo "A" | UTMonline</p>
+            <p>&copy; 2026 Universidad Técnica de Manabí - Todos los derechos reservados</p>
+        </footer>
+
+    </div>
+</body>
+</html>
