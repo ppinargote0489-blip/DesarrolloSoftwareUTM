@@ -1,14 +1,18 @@
-/* ---  Variables de Diseño (UI Kit) --- */
+/* --- 1. Variables de Diseño (UI Kit) --- */
 :root {
-    --primary: #0056b3;     
-    --secondary: #6c757d;   
-    --danger: #dc3545;      
-    --card-bg: #fffcf5;     
-    --bg-body: #f4f4f9;     
-    --text: #333;           
+    --primary: #0056b3;
+    --secondary: #6c757d;
+    --danger: #dc3545;
+    --card-bg: #fffcf5;
+    --bg-body: #f4f4f9;
+    --text: #333;
 }
 
 /* --- 2. Base del Sitio --- */
+* {
+    box-sizing: border-box; /* Vital para que el padding no rompa el diseño */
+}
+
 body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
@@ -18,9 +22,9 @@ body {
     color: var(--text);
 }
 
-.container { 
-    width: 95%; 
-    margin: 40px auto; 
+.container {
+    width: 95%;
+    margin: 40px auto;
     max-width: 1000px;
 }
 
@@ -31,10 +35,10 @@ body {
     margin-bottom: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border-left: 6px solid var(--primary); /* Toque de diseño en el borde */
+    border-left: 6px solid var(--primary);
 }
 
-/* --- 4. Navegacion --- */
+/* --- 4. Navegación --- */
 nav {
     background: white;
     padding: 15px 20px;
@@ -47,6 +51,7 @@ nav ul {
     display: flex;
     list-style: none;
     padding: 0;
+    margin: 0;
     gap: 20px;
 }
 
@@ -86,6 +91,7 @@ input, select {
 
 /* --- 6. Tabla --- */
 .table-container {
+    width: 100%;
     overflow-x: auto;
 }
 
@@ -93,6 +99,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    min-width: 500px; /* Asegura que la tabla no se aplaste demasiado */
 }
 
 table th, table td {
@@ -107,16 +114,26 @@ table th {
 
 /* --- 7. Responsividad --- */
 @media (max-width: 768px) {
-    .container { width: 90%; margin: 20px auto; }
+    .container { 
+        width: 90%; 
+        margin: 20px auto; 
+    }
 
-   
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
 
+    input, select {
+        max-width: 100%;
+    }
 }
+
 .logo-index {
     display: block;
     margin: 0 auto 20px auto;
-    width: 200px !important;    /* Tamaño controlado: 200px de ancho */
+    width: 200px !important;
     height: auto !important;
-    max-width: 100% !important; 
+    max-width: 100% !important;
 }
-
