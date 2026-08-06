@@ -10,39 +10,39 @@
     <div class="container">
 
         <header>
-            <img src="logo.png.png" alt="Logo SGA" class="logo-index">
-            <h1>SGA: Sistema de Gestion de incidentes</h1>
+            <img src="logo.png.png" alt="Logo corporativo del Sistema de Gestión de Incidentes SGA" class="logo-index">
+            <h1>SGA: Sistema de Gestión de Incidentes</h1>
             <p>Plataforma de Soporte Técnico - Infraestructura de Data Center</p>
         </header>
 
-        <nav>
+        <nav aria-label="Menú Principal">
             <ul>
-                <li><a href="index.html">Inicio (Dashboard)</a></li>
+                <li><a href="index.html" class="active">Inicio (Dashboard)</a></li>
                 <li><a href="reportar.html">Reportar Incidente</a></li>
-                <li><a href="tickets.html">Lista de tickets</a></li>
+                <li><a href="tickets.html">Lista de Tickets</a></li>
             </ul>
         </nav>
 
         <main>
             <section class="card">
                 <h2>Bienvenido al Motor Central de Incidencias</h2>
-                <p>Monitoreo activo y control de estados unificado a través de la instancia global <code>TicketGestion</code> (Patrón Singleton).</p>
+                <p>Monitoreo activo y control de estados unificado conectado a la base de datos en la nube (MongoDB Atlas / Spring Boot).</p>
             </section>
 
             <section class="card">
                 <h2>Resumen Operativo del Data Center</h2>
                 <article>
-                    <h3>Incidente en estado: Pendiente</h3>
-                    <p>Existen <strong>2</strong> alertas criticas de conectividad esperando la asignacion automatica a un especialista de guardia.</p>
+                    <h3>Incidencias del Sistema</h3>
+                    <p>El sistema se encuentra sincronizado con el backend en el puerto <strong>8081</strong> para la gestión en tiempo real.</p>
                 </article>
                 <article>
-                    <h3>Cumplimiento de Acuerdos de Servicios(SLA)</h3>
-                    <p>EL Sistema se encuentra supervisando el tiempo de respuesta para mitigar el riesgo de escalamiento en tickets de prioridad alta.</p>
+                    <h3>Cumplimiento de Acuerdos de Servicios (SLA)</h3>
+                    <p>El sistema supervisa el tiempo de respuesta para mitigar el riesgo de escalamiento en tickets de prioridad alta.</p>
                 </article>
             </section> 
 
             <section class="card">
-                <h2>Modulos Disponibles por actor del sistema</h2>
+                <h2>Módulos Disponibles por Actor del Sistema</h2>
                 <ul>
                     <li><strong>Usuarios:</strong> Registro inmediato de anomalías en hardware, software o redes.</li>
                     <li><strong>Reportes:</strong> Recepción de notificaciones en tiempo real, diagnóstico y actualización de estados.</li>

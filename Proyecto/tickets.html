@@ -3,70 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA - Registro General de Tickets</title>
+    <title>SGA - Lista de Tickets</title>
     <link rel="stylesheet" href="estilos.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #0056b3; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .btn-accion { padding: 5px 10px; cursor: pointer; border: none; border-radius: 4px; color: white; margin-right: 5px; }
+        .btn-editar { background-color: #ffc107; color: black; font-weight: bold; }
+        .btn-eliminar { background-color: #dc3545; }
+        #modalEditar { display: none; margin-top: 20px; padding: 20px; border: 1px solid #0056b3; background-color: #f8f9fa; border-radius: 5px; }
+    </style>
 </head>
 <body>
     <div class="container">
-        
+
         <header>
+            <img src="logo.png.png" alt="Logo corporativo del Sistema de Gestión de Incidentes SGA" class="logo-index">
             <h1>SGA: Sistema de Gestión de Incidentes</h1>
-            <p>Consolidado de Datos de la Colección en Memoria (listaTickets)</p>
+            <p>Plataforma de Soporte Técnico - Infraestructura de Data Center</p>
         </header>
 
-        <nav>
+        <nav aria-label="Menú Principal">
             <ul>
                 <li><a href="index.html">Inicio (Dashboard)</a></li>
                 <li><a href="reportar.html">Reportar Incidente</a></li>
-                <li><a href="tickets.html">Listado de Tickets</a></li>
+                <li><a href="tickets.html" class="active">Lista de Tickets</a></li>
             </ul>
         </nav>
 
         <main>
             <section class="card">
                 <h2>Listado de Tickets Registrados</h2>
-                <p>Mapeo actual de objetos creados por la fábrica. Al cambiar el estado de un ticket, se dispara la notificación a los Técnicos Inscritos (Patrón Observer).</p>
-
-                <div class="table-container">
+                <p>Gestión y control de incidentes sincronizados con MongoDB Atlas.</p>
+                
+                <div style="overflow-x: auto;">
                     <table>
                         <thead>
                             <tr>
-                                <th>id (String)</th>
-                                <th>Tipo de Objeto</th>
-                                <th>descripción (String)</th>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
                                 <th>Prioridad</th>
-                                <th>estado (String)</th>
-                                <th>Acciones de Control (Casos de Uso)</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tablaTickets">
                             <tr>
-                                <td>INC-001</td>
-                                <td>IncidenteRed</td>
-                                <td>Pérdida de paquetes en el Switch Backbone del Data Center.</td>
-                                <td>Alta</td>
-                                <td>Pendiente</td>
-                                <td><a href="#">Asignar Técnico</a> | <a href="#">Escalar Ticket</a></td>
-                            </tr>
-                            <tr>
-                                <td>INC-002</td>
-                                <td>IncidenteHardware</td>
-                                <td>Alerta de sobrecalentamiento en el Rack de Servidores de Base de Datos N°3.</td>
-                                <td>Alta</td>
-                                <td>En Proceso</td>
-                                <td><a href="#">Actualizar Estado</a> | <a href="#">Escalar Ticket</a></td>
-                            </tr>
-                            <tr>
-                                <td>INC-003</td>
-                                <td>IncidenteSoftware</td>
-                                <td>Excepción de desbordamiento en los scripts de respaldo automatizado de la nube.</td>
-                                <td>Media</td>
-                                <td>Resuelto</td>
-                                <td><strong>Caso Cerrado (Incidente Resolver)</strong></td>
+                                <td colspan="7" style="text-align: center;">Cargando tickets...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Formulario de Edición -->
+                <div id="modalEditar">
+                    <h3>Actualizar Ticket</h3>
+                    <form id="formEditar">
+                        <input type="hidden" id="editId">
+                        
+                        <div style="margin-bottom: 10px;">
+                            <label><strong>Título:</strong></label><br>
+                            <input type="text" id="editTitulo" required style="width: 100%; padding: 6px;">
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <label><strong>Descripción:</strong></label><br>
+                            <textarea id="editDescripcion" rows="3" required style="width: 100%; padding: 6px;"></textarea>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <label><strong>Categoría:</strong></label><br>
+                            <select id="editCategoria" style="width: 100%; padding: 6px;">
+                                <option value="Red">Red</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Software">Software</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <label><strong>Prioridad:</strong></label><br>
+                            <select id="editPrioridad" style="width: 100%; padding: 6px;">
+                                <option value="Alta">Alta</option>
+                                <option value="Media">Media</option>
+                                <option value="Baja">Baja</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <label><strong>Estado:</strong></label><br>
+                            <select id="editEstado" style="width: 100%; padding: 6px;">
+                                <option value="Abierto">Abierto</option>
+                                <option value="En Proceso">En Proceso</option>
+                                <option value="Cerrado">Cerrado</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-accion" style="background-color: #28a745;">Guardar Cambios</button>
+                        <button type="button" class="btn-accion" style="background-color: #6c757d;" onclick="cancelarEdicion()">Cancelar</button>
+                    </form>
+                </div>
+
             </section>
         </main>
 
@@ -76,5 +116,108 @@
         </footer>
 
     </div>
+
+    <script>
+        const API_URL = 'http://localhost:8081/tickets';
+
+        async function cargarTickets() {
+            const tbody = document.getElementById('tablaTickets');
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Error al obtener datos');
+                const tickets = await response.json();
+
+                tbody.innerHTML = '';
+
+                if (tickets.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No hay tickets registrados.</td></tr>';
+                    return;
+                }
+
+                tickets.forEach(ticket => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${ticket.id || 'N/A'}</td>
+                        <td>${ticket.titulo || 'Sin título'}</td>
+                        <td>${ticket.descripcion || 'Sin descripción'}</td>
+                        <td>${ticket.categoria || 'N/A'}</td>
+                        <td>${ticket.prioridad || 'N/A'}</td>
+                        <td><strong>${ticket.estado || 'Abierto'}</strong></td>
+                        <td>
+                            <button class="btn-accion btn-editar" onclick="abrirEditar('${ticket.id}', '${ticket.titulo}', '${ticket.descripcion}', '${ticket.categoria}', '${ticket.prioridad}', '${ticket.estado}')">Editar</button>
+                            <button class="btn-accion btn-eliminar" onclick="eliminarTicket('${ticket.id}')">Eliminar</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error al conectar con el servidor.</td></tr>';
+            }
+        }
+
+        async function eliminarTicket(id) {
+            if (!confirm('¿Estás seguro de eliminar este ticket?')) return;
+            try {
+                const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                if (response.ok) {
+                    alert('Ticket eliminado correctamente');
+                    cargarTickets();
+                } else {
+                    alert('No se pudo eliminar.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function abrirEditar(id, titulo, descripcion, categoria, prioridad, estado) {
+            document.getElementById('editId').value = id;
+            document.getElementById('editTitulo').value = titulo;
+            document.getElementById('editDescripcion').value = descripcion;
+            document.getElementById('editCategoria').value = categoria || 'Red';
+            document.getElementById('editPrioridad').value = prioridad || 'Media';
+            document.getElementById('editEstado').value = estado || 'Abierto';
+            
+            document.getElementById('modalEditar').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function cancelarEdicion() {
+            document.getElementById('modalEditar').style.display = 'none';
+        }
+
+        document.getElementById('formEditar').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('editId').value;
+            const ticketActualizado = {
+                titulo: document.getElementById('editTitulo').value,
+                descripcion: document.getElementById('editDescripcion').value,
+                categoria: document.getElementById('editCategoria').value,
+                prioridad: document.getElementById('editPrioridad').value,
+                estado: document.getElementById('editEstado').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(ticketActualizado)
+                });
+
+                if (response.ok) {
+                    alert('Ticket actualizado con éxito');
+                    document.getElementById('modalEditar').style.display = 'none';
+                    cargarTickets();
+                } else {
+                    alert('Error al actualizar.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        window.onload = cargarTickets;
+    </script>
 </body>
 </html>

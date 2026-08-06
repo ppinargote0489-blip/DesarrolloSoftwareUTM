@@ -3,67 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGA - Registrar Nuevo Incidente</title>
+    <title>SGA - Reportar Incidente</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <div class="container"> 
+    <div class="container">
+
         <header>
+            <img src="logo.png.png" alt="Logo corporativo del Sistema de Gestión de Incidentes SGA" class="logo-index">
             <h1>SGA: Sistema de Gestión de Incidentes</h1>
-            <p>Instanciación Dinámica de Reportes Críticos</p>
+            <p>Plataforma de Soporte Técnico - Infraestructura de Data Center</p>
         </header>
 
-        <nav>
+        <nav aria-label="Menú Principal">
             <ul>
                 <li><a href="index.html">Inicio (Dashboard)</a></li>
-                <li><a href="reportar.html">Reportar Incidente</a></li>
-                <li><a href="tickets.html">Listado de Tickets</a></li>
+                <li><a href="reportar.html" class="active">Reportar Incidente</a></li>
+                <li><a href="tickets.html">Lista de Tickets</a></li>
             </ul>
         </nav>
 
         <main>
             <section class="card">
-                <h2>Formulario de Ingreso de Incidentes</h2>
-                <p>Por favor, ingrese los detalles técnicos del fallo detectado.</p>
-
-                <form action="#" method="POST">
-                    <div>
-                        <label for="titulo">Título Corto de la Alerta:</label><br>
-                        <input type="text" id="titulo" name="titulo" required placeholder="Ej: Caída de enlace de fibra">
+                <h2>Registro de Nuevo Incidente</h2>
+                <p>Complete el siguiente formulario para registrar la anomalía directamente en la base de datos en la nube (MongoDB Atlas).</p>
+                
+                <form id="ticketForm">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="titulo"><strong>Título del Incidente:</strong></label><br>
+                        <input type="text" id="titulo" name="titulo" required style="width: 100%; padding: 8px; margin-top: 5px;" placeholder="Ej: Falla en servidor principal">
                     </div>
-                    <br>
-                    <div>
-                        <label for="categoria">Tipo de Incidente:</label><br>
-                        <select id="categoria" name="categoria" required>
-                            <option value="">-- Seleccione una opción --</option>
-                            <option value="IncidenteRed">Red</option>
-                            <option value="IncidenteHardware">Hardware</option>
-                            <option value="IncidenteSoftware">Software</option>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="descripcion"><strong>Descripción detallada:</strong></label><br>
+                        <textarea id="descripcion" name="descripcion" rows="4" required style="width: 100%; padding: 8px; margin-top: 5px;" placeholder="Describa el fallo en hardware, software o red..."></textarea>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="categoria"><strong>Categoría:</strong></label><br>
+                        <select id="categoria" name="categoria" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <option value="Red">Red</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Software">Software</option>
                         </select>
                     </div>
-                    <br>
-                    <fieldset>
-                        <legend>Nivel de Prioridad:</legend>
-                        <input type="radio" id="prioridad-alta" name="prioridad" value="Alta" required>
-                        <label for="prioridad-alta">Alta</label><br>
-                        <input type="radio" id="prioridad-media" name="prioridad" value="Media">
-                        <label for="prioridad-media">Media</label><br>
-                        <input type="radio" id="prioridad-baja" name="prioridad" value="Baja">
-                        <label for="prioridad-baja">Baja</label>
-                    </fieldset>
-                    <br>
-                    <div>
-                        <button type="submit" class="btn btn-primary">Ejecutar Registro de Ticket</button>
-                        <button type="reset" class="btn" style="background-color: var(--secondary);">Limpiar Formulario</button>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="prioridad"><strong>Prioridad:</strong></label><br>
+                        <select id="prioridad" name="prioridad" required style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Baja">Baja</option>
+                        </select>
                     </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label for="estado"><strong>Estado inicial:</strong></label><br>
+                        <select id="estado" name="estado" style="width: 100%; padding: 8px; margin-top: 5px;">
+                            <option value="Abierto">Abierto</option>
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Cerrado">Cerrado</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" style="padding: 10px 20px; background-color: #0056b3; color: white; border: none; cursor: pointer; border-radius: 4px;">Registrar Ticket</button>
                 </form>
+
+                <div id="mensajeRespuesta" style="margin-top: 15px; font-weight: bold;"></div>
             </section>
         </main>
 
         <footer>
-            <p>Desarrollado por: <strong>Pablo Joseph Pinargote Pico</strong> | 5to Semestre - Paralelo "A"</p>
+            <p>Desarrollado por: <strong>Pablo Joseph Pinargote Pico</strong> | 5to Semestre - Paralelo "A" | UTMonline</p>
+            <p>&copy; 2026 Universidad Técnica de Manabí - Todos los derechos reservados</p>
         </footer>
 
-    </div> 
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8081/tickets';
+
+        document.getElementById('ticketForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const ticketData = {
+                titulo: document.getElementById('titulo').value,
+                descripcion: document.getElementById('descripcion').value,
+                categoria: document.getElementById('categoria').value,
+                prioridad: document.getElementById('prioridad').value,
+                estado: document.getElementById('estado').value
+            };
+
+            const mensajeDiv = document.getElementById('mensajeRespuesta');
+            mensajeDiv.style.color = "black";
+            mensajeDiv.textContent = "Enviando datos al servidor...";
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(ticketData)
+                });
+
+                if (response.ok) {
+                    mensajeDiv.style.color = "green";
+                    mensajeDiv.textContent = "¡Incidente registrado exitosamente en MongoDB Atlas!";
+                    document.getElementById('ticketForm').reset();
+                } else {
+                    mensajeDiv.style.color = "red";
+                    mensajeDiv.textContent = "Error al registrar el ticket en el servidor.";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mensajeDiv.style.color = "red";
+                mensajeDiv.textContent = "No se pudo conectar con el backend (puerto 8081).";
+            }
+        });
+    </script>
 </body>
 </html>
